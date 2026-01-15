@@ -18,15 +18,21 @@ TinyMsg allows you to use simple tags to create gradients, hex colors, clickable
 
 ## Installation for server owners:
 
-### Download the TinyMsg jar
-Download the latest TinyMsg jar from the releases page and place it in your server's `mods` folder.
-
+### Download the TinyMessage.jar
+Download the latest TinyMessage.jar from the releases page and place it in your server's `mods` folder.
 
 ## Installation for developers:
 
 Temporary until hytale plugin repository is available.
 Create libs folder in your plugin directory and place the TinyMsg jar file there.
 project/libs/TinyMessage-1.0.1-SNAPSHOT.jar
+
+### manifest.json
+```json
+"Dependencies": {
+  "Zoltus:TinyMessage": "*"
+},
+```
 
 ### For Gradle
 ```kotlin

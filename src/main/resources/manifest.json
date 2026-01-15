@@ -1,0 +1,18 @@
+{
+  "Group": "Zoltus",
+  "Name": "TinyMessage",
+  "Version": "v1.0.1",
+  "Description": "Api for coloring messages!",
+  "Authors": [
+    {
+      "Name": "Zoltus"
+    }
+  ],
+  "Website": "website",
+  "ServerVersion": "*",
+  "Dependencies": {},
+  "OptionalDependencies": {},
+  "DisabledByDefault": false,
+  "Main": "fi.sulku.hytale.TinyMsg",
+  "IncludesAssetPack": false
+}

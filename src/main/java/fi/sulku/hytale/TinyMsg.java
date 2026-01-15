@@ -2,6 +2,9 @@ package fi.sulku.hytale;
 
 import com.hypixel.hytale.protocol.MaybeBool;
 import com.hypixel.hytale.server.core.Message;
+import com.hypixel.hytale.server.core.plugin.JavaPlugin;
+import com.hypixel.hytale.server.core.plugin.JavaPluginInit;
+import org.checkerframework.checker.nullness.compatqual.NonNullDecl;
 
 import java.awt.*;
 import java.util.*;
@@ -9,7 +12,12 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class TinyMsg {
+public class TinyMsg extends JavaPlugin {
+
+    public TinyMsg(@NonNullDecl JavaPluginInit init) {
+        super(init);
+    }
+
     // Matches <tag>, <tag:arg>, </tag>
     private static final Pattern TAG_PATTERN = Pattern.compile("<(/?)([a-zA-Z0-9_]+)(?::([^>]+))?>");
 
@@ -33,6 +41,7 @@ public class TinyMsg {
         NAMED_COLORS.put("yellow", new Color(255, 255, 85));
         NAMED_COLORS.put("white", new Color(255, 255, 255));
     }
+
 
     private record StyleState(
             Color color,
@@ -89,7 +98,6 @@ public class TinyMsg {
      * @param text The string to parse, containing TinyMsg formatting tags
      * @return A formatted {@link Message} object ready to be sent to players
      * @throws NullPointerException if text is null
-     *
      * @see Message
      */
     public static Message parse(String text) {
