@@ -25,7 +25,7 @@ Download the latest TinyMessage.jar from the releases page and place it in your 
 
 Temporary until hytale plugin repository is available.
 Create libs folder in your plugin directory and place the TinyMsg jar file there.
-project/libs/TinyMessage-1.0.2-SNAPSHOT.jar
+project/libs/TinyMessage-2.0.0-SNAPSHOT.jar
 
 ### manifest.json
 ```json
