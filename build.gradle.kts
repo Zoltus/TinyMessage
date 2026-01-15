@@ -19,7 +19,6 @@ kotlin {
 }
 
 tasks.shadowJar {
-    destinationDirectory.set(file("D:\\Pelit\\Hytale Launcher\\HytaleData\\UserData\\Mods"))
     archiveClassifier.set("")
 
     relocate("kotlin", "fi.sulku.hytale.libs.kotlin")
