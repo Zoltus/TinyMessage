@@ -3,6 +3,7 @@
 
 TinyMsg allows you to use simple tags to create gradients, hex colors, clickable links, and nested styles in Hytale chat similar to Minecraft's MiniMessage. It works as both a **standalone chat plugin** and a **developer library** (API).
 
+<img width="278" height="174" alt="HytaleClient_2026-01-15_08-44-16" src="https://github.com/user-attachments/assets/04816490-0a9e-4554-977c-b08fd1baee4c" />
 ---
 
 ## Features
