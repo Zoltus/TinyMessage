@@ -1,6 +1,6 @@
 plugins {
-    kotlin("jvm") version "2.3.0"
-    id("com.gradleup.shadow") version "9.2.2"
+    java
+    `maven-publish`
 }
 
 group = "fi.sulku.hytale"
@@ -11,21 +11,21 @@ repositories {
 }
 
 dependencies {
-    compileOnly(files("libs/HytaleServer.jar"))
+    compileOnly(files("libs/HytaleServer.jar")) // Temp
 }
 
-kotlin {
-    jvmToolchain(25)
+java {
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(25))
+    }
+    withSourcesJar()
+    withJavadocJar()
 }
 
-tasks.shadowJar {
-    archiveClassifier.set("")
-
-    relocate("kotlin", "fi.sulku.hytale.libs.kotlin")
-    relocate("org.intellij.lang.annotations", "fi.sulku.hytale.libs.annotations")
-    relocate("org.jetbrains.annotations", "fi.sulku.hytale.libs.jetbrains")
-}
-
-tasks.build {
-    dependsOn(tasks.shadowJar)
+publishing {
+    publications {
+        create<MavenPublication>("maven") {
+            from(components["java"])
+        }
+    }
 }
