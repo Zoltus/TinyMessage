@@ -1,17 +1,17 @@
 plugins {
     java
     `maven-publish`
+    id("hytale-mod") version "0.+"
 }
 
 group = "fi.sulku.hytale"
-version = "2.0.0"
+version = "2.0.1"
 
 repositories {
     mavenCentral()
-}
-
-dependencies {
-    compileOnly(files("libs/HytaleServer.jar")) // Temp
+    maven("https://maven.hytale-modding.info/releases") {
+        name = "HytaleModdingReleases"
+    }
 }
 
 java {
