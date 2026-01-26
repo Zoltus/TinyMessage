@@ -36,19 +36,29 @@ project/libs/TinyMessage-2.0.1-SNAPSHOT.jar
 
 ### For Gradle
 ```kotlin
+repositories {
+    maven { url = uri("https://jitpack.io") }
+}
+
 dependencies {
-    compileOnly(files("libs/tinymessage-2.0.1-SNAPSHOT.jar"))
+    compileOnly("com.github.Zoltus:TinyMessage:2.0.1")
 }
 ```
 
 ### For Maven
 ```xml
+<repositories>
+    <repository>
+        <id>jitpack.io</id>
+        <url>https://jitpack.io</url>
+    </repository>
+</repositories>
+
 <dependency>
-    <groupId>fi.sulku.hytale</groupId>
-    <artifactId>tinymessage</artifactId>
+    <groupId>com.github.Zoltus</groupId>
+    <artifactId>TinyMessage</artifactId>
     <version>2.0.1</version>
-    <scope>system</scope>
-    <systemPath>${project.basedir}/libs/tinymessage-2.0.1-SNAPSHOT.jar</systemPath>
+    <scope>provided</scope>
 </dependency>
 ```
 
