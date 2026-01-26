@@ -4,7 +4,6 @@ import com.hypixel.hytale.protocol.MaybeBool;
 import com.hypixel.hytale.server.core.Message;
 import com.hypixel.hytale.server.core.plugin.JavaPlugin;
 import com.hypixel.hytale.server.core.plugin.JavaPluginInit;
-import org.checkerframework.checker.nullness.compatqual.NonNullDecl;
 
 import java.awt.*;
 import java.util.*;
@@ -14,7 +13,7 @@ import java.util.regex.Pattern;
 
 public class TinyMsg extends JavaPlugin {
 
-    public TinyMsg(@NonNullDecl JavaPluginInit init) {
+    public TinyMsg(JavaPluginInit init) {
         super(init);
     }
 
