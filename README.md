@@ -25,7 +25,7 @@ Download the latest TinyMessage.jar from the releases page and place it in your 
 
 Temporary until hytale plugin repository is available.
 Create libs folder in your plugin directory and place the TinyMsg jar file there.
-project/libs/TinyMessage-2.0.0-SNAPSHOT.jar
+project/libs/TinyMessage-2.0.1-SNAPSHOT.jar
 
 ### manifest.json
 ```json
@@ -37,7 +37,7 @@ project/libs/TinyMessage-2.0.0-SNAPSHOT.jar
 ### For Gradle
 ```kotlin
 dependencies {
-    compileOnly(files("libs/tinymessage-2.0.0-SNAPSHOT.jar"))
+    compileOnly(files("libs/tinymessage-2.0.1-SNAPSHOT.jar"))
 }
 ```
 
@@ -46,9 +46,9 @@ dependencies {
 <dependency>
     <groupId>fi.sulku.hytale</groupId>
     <artifactId>tinymessage</artifactId>
-    <version>2.0.0</version>
+    <version>2.0.1</version>
     <scope>system</scope>
-    <systemPath>${project.basedir}/libs/tinymessage-2.0.0-SNAPSHOT.jar</systemPath>
+    <systemPath>${project.basedir}/libs/tinymessage-2.0.1-SNAPSHOT.jar</systemPath>
 </dependency>
 ```
 
