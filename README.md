@@ -1,3 +1,7 @@
+Abandoned project, no longer maintained.
+There was plans to add custom tags, but since this project does not offer anything which native Hytale chat does not already support, you should'nt use it.
+Hytale [FormattedMessage](https://docs.hytale.com/com/hypixel/hytale/protocol/FormattedMessage#markupEnabled) enables markdown.
+
 # TinyMsg
 **A lightweight, powerful rich text parser for Hytale servers.**
 
