@@ -1,11 +1,11 @@
 package fi.sulku.hytale;
 
-import com.hypixel.hytale.protocol.MaybeBool;
 import com.hypixel.hytale.server.core.Message;
 import com.hypixel.hytale.server.core.plugin.JavaPlugin;
 import com.hypixel.hytale.server.core.plugin.JavaPluginInit;
 
 import java.awt.*;
+import java.lang.reflect.Field;
 import java.util.*;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -19,6 +19,7 @@ public class TinyMsg extends JavaPlugin {
 
     // Matches <tag>, <tag:arg>, </tag>
     private static final Pattern TAG_PATTERN = Pattern.compile("<(/?)([a-zA-Z0-9_]+)(?::([^>]+))?>");
+    private static final UnderlineAdapter UNDERLINE_ADAPTER = createUnderlineAdapter();
 
     private static final Map<String, Color> NAMED_COLORS = new HashMap<>();
 
@@ -221,7 +222,7 @@ public class TinyMsg extends JavaPlugin {
         if (state.bold) msg.bold(true);
         if (state.italic) msg.italic(true);
         if (state.monospace) msg.monospace(true);
-        if (state.underlined) msg.getFormattedMessage().underlined = MaybeBool.True;
+        if (state.underlined) applyUnderline(msg);
         if (state.link != null) msg.link(state.link);
 
         return msg;
@@ -242,12 +243,64 @@ public class TinyMsg extends JavaPlugin {
             if (state.bold) charMsg.bold(true);
             if (state.italic) charMsg.italic(true);
             if (state.monospace) charMsg.monospace(true);
-            if (state.underlined) charMsg.getFormattedMessage().underlined = MaybeBool.True;
+            if (state.underlined) applyUnderline(charMsg);
             if (state.link != null) charMsg.link(state.link);
 
             container.insert(charMsg);
         }
         return container;
+    }
+
+    private static void applyUnderline(Message message) {
+        UNDERLINE_ADAPTER.apply(message);
+    }
+
+    private static UnderlineAdapter createUnderlineAdapter() {
+        try {
+            Class<?> formattedMessageType = Class.forName(
+                    "com.hypixel.hytale.protocol.FormattedMessage",
+                    false,
+                    TinyMsg.class.getClassLoader()
+            );
+            Field field = formattedMessageType.getField("underlined");
+            Object trueValue = createUnderlineTrueValue(field.getType());
+            return new UnderlineAdapter(field, trueValue);
+        } catch (ReflectiveOperationException | IllegalArgumentException e) {
+            return UnderlineAdapter.NO_OP;
+        }
+    }
+
+    private static Object createUnderlineTrueValue(Class<?> underlineType) {
+        if (underlineType == Boolean.class || underlineType == boolean.class) {
+            return Boolean.TRUE;
+        }
+
+        if (underlineType.isEnum()) {
+            for (Object constant : underlineType.getEnumConstants()) {
+                String name = ((Enum<?>) constant).name();
+                if ("True".equals(name) || "TRUE".equals(name)) {
+                    return constant;
+                }
+            }
+        }
+
+        throw new IllegalArgumentException("Unsupported underline type: " + underlineType.getName());
+    }
+
+    private record UnderlineAdapter(Field field, Object trueValue) {
+        static final UnderlineAdapter NO_OP = new UnderlineAdapter(null, null);
+
+        void apply(Message message) {
+            if (field == null) {
+                return;
+            }
+
+            try {
+                field.set(message.getFormattedMessage(), trueValue);
+            } catch (IllegalAccessException e) {
+                throw new IllegalStateException("Unable to apply underline formatting", e);
+            }
+        }
     }
 
     private static Color parseColorArg(String arg) {
